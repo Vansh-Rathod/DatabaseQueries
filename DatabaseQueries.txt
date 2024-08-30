@@ -1,0 +1,183 @@
+-> Basic Database Queries
+
+(1) Select Database :
+USE DATABASE <databaseName>;
+
+(2) See All Database :
+SHOW DATABASES;
+
+(3) Create Database :
+CREATE DATABASE <databaseName>;
+
+(4) Drop / Delete Database :
+DROP DATABASE <databaseName>;
+
+(5) Rename Database :
+ALTER DATABASE <oldDatabaseName> MODIFY NAME = <newDatabaseName>;
+RENAME DATABASE <oldDatabaseName> TO <newDatabaseName>;
+
+(6) Backup Database :
+BACKUP DATABASE <databaseName> TO DISK = '<filePath>' GO;
+
+(7) Create Table :
+CREATE TABLE <tableName>(
+    column1 datatype
+    column2 datatype
+    column3 datatype
+    .....
+    columnN datatype
+);
+
+(8) Create table from existing table :
+CREATE TABLE <tableName> AS SELECT column1, column2, column3, ...., columnN FROM <existingTableName>;
+
+(9) Description of Table :
+DESC <tableName>;
+
+(10) See all table present in database :
+SHOW TABLES;
+
+(11) Rename table :
+RENAME TABLE <oldTableName> TO <newTableName>;
+ALTER TABLE <oldTableName> RENAME TO <newTableName>;
+
+(12) Truncate table :
+TRUNCATE TABLE <tableName>;
+
+------------------------------------------------------------------HOLD
+(13) Clone tables :
+
+
+(14) Create temporary table :
+CREATE TEMPORARY TABLE <tableName>(
+    column1 datatype
+    column2 datatype
+    column3 datatype
+    .....
+    columnN datatype
+);
+
+(15) Alter table :
+
+-> add column :
+ALTER TABLE <tableName> ADD <columnName> <datatype>;
+
+-> drop column :
+ALTER TABLE <tableName> DROP COLUMN <columnName>;
+
+-> add index :
+ALTER TABLE <tableName> ADD INDEX <indexName> <(indexType)>;
+
+-> drop index :
+ALTER TABLE <tableName> DROP INDEX <indexName>;
+
+-> add primary key constraint :
+ALTER TABLE <tableName> ADD CONSTRAINT <constraintName> PRIMARY KEY(column1, column2, ....);
+
+-> drop primary key constraint :
+ALTER TABLE <tableName> DROP PRIMARY KEY;
+
+-> add unique constraint :
+ALTER TABLE <tableName> ADD CONSTRAINT <constraintName> UNIQUE(column1, column2, ....);
+
+-> drop unique constraint :
+ALTER TABLE <tableName> DROP <constraintName>;
+
+-> rename column name :
+ALTER TABLE <tableName> RENAME COLUMN <olbColumnName> TO <newColumnName>;
+
+-> change column datatype :
+ALTER TABLE <tableName> MODIFY COLUMN <columnName> <datatype>;
+
+(16) Drop table :
+DROP TABLE <tableName>;
+
+(17) Delete table :
+DELETE FROM <tableName>;
+
+(18) Defining Constraints :
+
+-> not null constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    age INT,
+    address CHAR(25),
+    salary DECIMAL(18,2)
+);
+
+-> unique key constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL UNIQUE,
+    name VARCHAR(20) NOT NULL,
+    age INT,
+    address CHAR(25),
+    salary DECIMAL(18,2)
+);
+
+-> default value constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL,
+    name VARCHAR(20) DEFAULT 'Not Available',
+    age INT,
+    address CHAR(25),
+    salary DECIMAL(18,2)
+);
+
+-> primary key constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    age INT,
+    address CHAR(25),
+    salary DECIMAL(18,2),
+    PRIMARY KEY(id)
+);
+
+-> primary key constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL,
+    date DATETIME,
+    cutomerId INT FOREIGN KEY REFERENCES CUSTOMERS(id),
+    amount DECIMAL,
+    PRIMARY KEY(id)
+);
+
+-> check value constraint :
+CREATE TABLE <tableName>(
+    id INT NOT NULL,
+    name VARCHAR(20) NOT NULL,
+    age INT CHECK(age >= 18),
+    address CHAR(25),
+    salary DECIMAL(18,2),
+    PRIMARY KEY(id)
+);
+
+(19) Insert values in table :
+INSERT INTO <tableName> (column1, column2, ..., columnN) VALUES (value1, value2, ...., valueN);
+
+(20) select values from table :
+SELECT * FROM <tableName>;
+SELECT (column1, column2, ...., columnN) FROM <tableName>;
+SELECT columnName AS aliasName FROM <tableName>;
+
+
+(21) select into statement for copying one table data to another table
+
+-> copying complete data from existing table into the new table :
+SELECT * INTO <newTableName> FROM <existingTableName>;
+
+-> copying data from specific columns :
+SELECT column1, column2, ...., columnN INTO <newTableName> FROM <existingTableName>;
+
+-> copying data from multiple tables :
+SELECT column1, column2, ...., columnN INTO <newTableName> FROM <existingTable1> JOIN <existingTable2> WHERE existingTable1.column = existingTable2.column;
+
+(22) Insert Into Select statement to insert one table data into another table :
+INSERT INTO <table1> SELECT * FROM <table2>;
+
+(23) Update query :
+UPDATE <tableName> SET column1 = value, column2 = value, ...., columnN = value;
+
+(24) Delete query :
+DELETE FROM <tableName>;
