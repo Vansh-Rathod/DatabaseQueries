@@ -3,21 +3,33 @@
 (1) Select Database :
 USE DATABASE <databaseName>;
 
+-----------------------------------------------------------------------------------------
+
 (2) See All Database :
 SHOW DATABASES;
+
+-----------------------------------------------------------------------------------------
 
 (3) Create Database :
 CREATE DATABASE <databaseName>;
 
+-----------------------------------------------------------------------------------------
+
 (4) Drop / Delete Database :
 DROP DATABASE <databaseName>;
+
+-----------------------------------------------------------------------------------------
 
 (5) Rename Database :
 ALTER DATABASE <oldDatabaseName> MODIFY NAME = <newDatabaseName>;
 RENAME DATABASE <oldDatabaseName> TO <newDatabaseName>;
 
+-----------------------------------------------------------------------------------------
+
 (6) Backup Database :
 BACKUP DATABASE <databaseName> TO DISK = '<filePath>' GO;
+
+-----------------------------------------------------------------------------------------
 
 (7) Create Table :
 CREATE TABLE <tableName>(
@@ -28,25 +40,38 @@ CREATE TABLE <tableName>(
     columnN datatype
 );
 
+-----------------------------------------------------------------------------------------
+
 (8) Create table from existing table :
 CREATE TABLE <tableName> AS SELECT column1, column2, column3, ...., columnN FROM <existingTableName>;
+
+-----------------------------------------------------------------------------------------
 
 (9) Description of Table :
 DESC <tableName>;
 
+-----------------------------------------------------------------------------------------
+
 (10) See all table present in database :
 SHOW TABLES;
+
+-----------------------------------------------------------------------------------------
 
 (11) Rename table :
 RENAME TABLE <oldTableName> TO <newTableName>;
 ALTER TABLE <oldTableName> RENAME TO <newTableName>;
 
+-----------------------------------------------------------------------------------------
+
 (12) Truncate table :
 TRUNCATE TABLE <tableName>;
 
-------------------------------------------------------------------HOLD
+-----------------------------------------------------------------------------------------HOLD
+
 (13) Clone tables :
 
+
+-----------------------------------------------------------------------------------------
 
 (14) Create temporary table :
 CREATE TEMPORARY TABLE <tableName>(
@@ -56,6 +81,8 @@ CREATE TEMPORARY TABLE <tableName>(
     .....
     columnN datatype
 );
+
+-----------------------------------------------------------------------------------------
 
 (15) Alter table :
 
@@ -89,11 +116,18 @@ ALTER TABLE <tableName> RENAME COLUMN <olbColumnName> TO <newColumnName>;
 -> change column datatype :
 ALTER TABLE <tableName> MODIFY COLUMN <columnName> <datatype>;
 
+-----------------------------------------------------------------------------------------
+
 (16) Drop table :
 DROP TABLE <tableName>;
 
+-----------------------------------------------------------------------------------------
+
 (17) Delete table :
 DELETE FROM <tableName>;
+DELETE FROM <tableName> WHERE name = "hardik";
+
+-----------------------------------------------------------------------------------------
 
 (18) Defining Constraints :
 
@@ -134,7 +168,7 @@ CREATE TABLE <tableName>(
     PRIMARY KEY(id)
 );
 
--> primary key constraint :
+-> foreign key constraint :
 CREATE TABLE <tableName>(
     id INT NOT NULL,
     date DATETIME,
@@ -153,14 +187,19 @@ CREATE TABLE <tableName>(
     PRIMARY KEY(id)
 );
 
+-----------------------------------------------------------------------------------------
+
 (19) Insert values in table :
 INSERT INTO <tableName> (column1, column2, ..., columnN) VALUES (value1, value2, ...., valueN);
+
+-----------------------------------------------------------------------------------------
 
 (20) select values from table :
 SELECT * FROM <tableName>;
 SELECT (column1, column2, ...., columnN) FROM <tableName>;
 SELECT columnName AS aliasName FROM <tableName>;
 
+-----------------------------------------------------------------------------------------
 
 (21) select into statement for copying one table data to another table
 
@@ -173,11 +212,140 @@ SELECT column1, column2, ...., columnN INTO <newTableName> FROM <existingTableNa
 -> copying data from multiple tables :
 SELECT column1, column2, ...., columnN INTO <newTableName> FROM <existingTable1> JOIN <existingTable2> WHERE existingTable1.column = existingTable2.column;
 
+-----------------------------------------------------------------------------------------
+
 (22) Insert Into Select statement to insert one table data into another table :
 INSERT INTO <table1> SELECT * FROM <table2>;
+
+-----------------------------------------------------------------------------------------
 
 (23) Update query :
 UPDATE <tableName> SET column1 = value, column2 = value, ...., columnN = value;
 
+-----------------------------------------------------------------------------------------
+
 (24) Delete query :
 DELETE FROM <tableName>;
+
+-----------------------------------------------------------------------------------------
+
+(25) Where Clause :
+SELECT * FROM <tableName> WHERE empId = 2000;
+
+-----------------------------------------------------------------------------------------
+
+(26) Top Clause :
+SELECT TOP 4 * FROM <tableName>;
+SELECT TOP 2 * FROM <tableName> WHERE Name LIKE 'k%';
+
+-----------------------------------------------------------------------------------------
+
+(27) Distinct Clause :
+SELECT DISTINCT column1, column2, ..., columnN FROM <tableName>;
+
+-----------------------------------------------------------------------------------------
+
+(28) Order By Clause :
+SELECT * FROM <tableName> ORDER BY name ASC;
+SELECT * FROM <tableName> ORDER BY age ASC, salary DESC;
+SELECT * FROM <tableName> ORDER BY name LIMIT 4;
+
+-----------------------------------------------------------------------------------------
+
+(29) Group By Clause :
+SELECT age, COUNT(name) FROM <tableName> GROUP BY age;
+SELECT age, MAX(salary) AS MAX_SALARY FROM <tableName> GROUP BY age;
+SELECT age, SUM(salary) AS TOTAL_SALARY FROM <tableName> GROUP BY address, age;
+
+-----------------------------------------------------------------------------------------
+
+(30) Having Clause :
+SELECT address, age, MIN(salary) AS MIN_SALARY FROM <tableName> GROUP BY address, age HAVING age > 25;
+SELECT address, age, SUM(salary) AS TOTAL_SALARY FROM <tableName> GROUP BY address, age HAVING TOTAL_SALARY >= 5000 ORDER BY TOTAL_SALARY DESC;
+SELECT age, COUNT(age) FROM <tableName> GROUP BY age HAVING COUNT(age) >= 2;
+
+-----------------------------------------------------------------------------------------
+
+(31) Regexp Clause :
+
+-> basic regexp statement
+SELECT * FROM <tableName> WHERE name REGEXP "vansh";
+
+-> ^ is used to represent that a word start with specified sub-word
+SELECT * FROM <tableName> WHERE name REGEXP "^va";
+
+-> $ is used to represent that a word ends with specified sub-word
+SELECT * FROM <tableName> WHERE name REGEXP "sh$";
+
+-> | is used to select values that are matching the following conditions
+SELECT * FROM <tableName> WHERE firstName REGEXP "^v | ^l | h$";
+
+-> [a-z] is used to select values that are between the following conditions
+SELECT * FROM <tableName> WHERE firstName REGEXP "^[a-f]";
+SELECT * FROM <tableName> WHERE firstName REGEXP "^[abchef]";
+
+SELECT * FROM <tableName> WHERE firstName REGEXP "^[a-d] | sh$";
+
+-----------------------------------------------------------------------------------------
+
+(32) Like Clause :
+SELECT * FROM <tableName> WHERE name LIKE "v%";
+SELECT * FROM <tableName> WHERE name LIKE "___sh";
+SELECT * FROM <tableName> WHERE name LIKE "__n%";
+SELECT * FROM <tableName> WHERE name LIKE "_a_s%";
+
+-> used to fetch data from column haivng %
+SELECT * FROM <tableName> WHERE bonus_percent LIKE '%!%%' ESCAPE '!';
+
+-----------------------------------------------------------------------------------------
+
+(33) In Operator
+SELECT * FROM <tableName> WHERE salary IN (1000, 2000, 3000);
+
+-----------------------------------------------------------------------------------------
+
+(34) Any & All Operator :
+SELECT * FROM <tableName> WHERE salary > ANY (SELECT salary FROM <tableName> WHERE age = 25);
+SELECT * FROM <tableName> WHERE salary < ANY (SELECT AVG(salary) FROM <tableName>);
+SELECT * FROM <tableName> WHERE age = ANY (SELECT age FROM <tableName> WHERE name LIKE "va%");
+
+SELECT * FROM <tableName> WHERE salary <> ALL (SELECT salary FROM <tableName> WHERE age = 25);
+
+-----------------------------------------------------------------------------------------
+
+(35) Case Operator :
+
+SELECT *,
+CASE
+WHEN age > 30 THEN 'Gen X'
+WHEN age > 25 THEN 'Gen Y'
+WHEN age > 20 THEN 'Gen Z'
+ELSE 'Gen Alpha'
+END AS age_group
+FROM <tableName>;
+
+
+SELECT *,
+CASE
+WHEN salary < 4500 THEN (salary + salary * 0.50)
+WHEN salary < 10000 THEN (salary + salary * 0.25)
+ELSE salary
+END AS incremented_salary
+FROM <tableName>;
+
+-----------------------------------------------------------------------------------------
+
+(36) Not Equal Operator :
+SELECT * FROM <tableName> WHERE name <> 'vansh';
+SELECT * FROM <tableName> WHERE salary != 10000;
+
+-----------------------------------------------------------------------------------------
+
+(37) Is Null Operator :
+SELECT * FROM <tableName> WHERE salary IS NULL;
+SELECT COUNT(*) AS null_salary FROM <tableName> WHERE salary IS NULL;
+UPDATE <tableName> SET age = 45 WHERE age IS NULL;
+
+-----------------------------------------------------------------------------------------
+
+
