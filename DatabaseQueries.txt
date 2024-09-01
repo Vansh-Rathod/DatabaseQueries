@@ -348,4 +348,80 @@ UPDATE <tableName> SET age = 45 WHERE age IS NULL;
 
 -----------------------------------------------------------------------------------------
 
+(38) Unique Key :
+
+-> creating unique key :
+CREATE TABLE <tableName>(
+    column1 datatype UNIQUE KEY,
+    column2 datatype UNIQUE KEY,
+    column3 datatype,
+    column4 datatype,
+    ...
+);
+
+-> creating unique key in existing column :
+ALTER TABLE <tableName> ADD CONSTRAINT
+uniqueKeyConstraintName UNIQUE(columnName);
+
+-> dropping unique key :
+ALTER TABLE <tableName> DROP CONSTRAINT uniqueKeyConstraintName 
+
+-----------------------------------------------------------------------------------------
+
+(39) Primary Key :
+
+-> creating primary key :
+CREATE TABLE <tableName>(
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+    column4 datatype,
+    PRIMARY KEY(column1)
+);
+
+-> creating primary key in existing column :
+ALTER TABLE <tableName> ADD CONSTRAINT PRIMARY KEY(columnName);
+
+-> dropping primary key :
+ALTER TABLE <tableName> DROP PRIMARY KEY;
+
+-----------------------------------------------------------------------------------------
+
+(40) Foreign Key :
+
+-> creating foreign key :
+CREATE TABLE <tableName>(
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+    column4 datatype,
+    ...,
+    CONSTRAINT foreignKeyName
+    FOREIGN KEY (columnName)
+    REFERENCES <referencedTableName>(referencedColumnName)
+);
+
+-> creating foreign key in existing column :
+ALTER TABLE <tableName>
+ADD CONSTRAINT foreignKeyName
+FOREIGN KEY(columnName) REFERENCES <referencedTableName>(referencedColumnName);
+
+-> dropping foreign key :
+ALTER TABLE <tableName> DROP FOREIGN KEY foreignKeyName
+
+-----------------------------------------------------------------------------------------
+
+(41) Composite Key :
+
+-> creating composite key :
+CREATE TABLE <tableName>(
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+    column4 datatype,
+    PRIMARY KEY(column1, column2)
+);
+
+-> dropping composite key :
+ALTER TABLE <tableName> DROP PRIMARY KEY;
 
